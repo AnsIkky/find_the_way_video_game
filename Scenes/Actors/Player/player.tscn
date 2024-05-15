@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3 uid="uid://6pbl2bkuefml"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/Player/player.gd" id="1_nwh3b"]
+[ext_resource type="Texture2D" uid="uid://3ygodqmlr24p" path="res://Assets/img/Actors/Player/player-Sheet_02.png" id="2_1hrv5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n4rac"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j26px"]
+radial_velocity_min = 10.0
+radial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_jr8oy"]
+resource_name = "move"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_0scyb"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 3, 1]
+}
+
+[sub_resource type="Animation" id="Animation_pf57b"]
+resource_name = "die"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hy20n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mga2r"]
+_data = {
+"RESET": SubResource("Animation_hy20n"),
+"die": SubResource("Animation_pf57b"),
+"idle": SubResource("Animation_0scyb"),
+"move": SubResource("Animation_jr8oy")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player_entity"]]
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("1_nwh3b")
+acceleration_speed = 7.0
+deceleration_speed = 4.0
+move_speed = 10000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n4rac")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.5708
+texture = ExtResource("2_1hrv5")
+hframes = 4
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+position = Vector2(-12, -1)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_j26px")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mga2r")
+}
+
+[node name="ReviveTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ReviveTimer" to="." method="_on_revive_timer_timeout"]

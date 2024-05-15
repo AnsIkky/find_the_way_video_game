@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=3 uid="uid://e67b4eang357"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/enemies/large_enemy.gd" id="1_33f7a"]
+[ext_resource type="Texture2D" uid="uid://dmy4paawxaopv" path="res://Assets/img/Actors/enemies/enemy_sheet02.png" id="1_g0fgx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_krf3e"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4d3l"]
+atlas = ExtResource("1_g0fgx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj6r7"]
+atlas = ExtResource("1_g0fgx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo005"]
+atlas = ExtResource("1_g0fgx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwce2"]
+atlas = ExtResource("1_g0fgx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl4c2"]
+atlas = ExtResource("1_g0fgx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w6plg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4d3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vj6r7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo005")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwce2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl4c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwce2")
+}],
+"loop": true,
+"name": &"move",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slikn"]
+radius = 168.012
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6a3ox"]
+radius = 222.002
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yb4pd"]
+radius = 7.0
+height = 26.0
+
+[node name="LargeEnemy" type="CharacterBody2D" groups=["enemy_entity"]]
+collision_layer = 8
+collision_mask = 27
+script = ExtResource("1_33f7a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_krf3e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_w6plg")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.98086
+
+[node name="DirectionTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="ChaseStartArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseStartArea"]
+shape = SubResource("CircleShape2D_slikn")
+debug_color = Color(0.988235, 0, 0.317647, 0.419608)
+
+[node name="ChaseEndArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseEndArea"]
+shape = SubResource("CircleShape2D_6a3ox")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yb4pd")
+debug_color = Color(0.682353, 0.501961, 0, 0.419608)
+
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="body_entered" from="ChaseStartArea" to="." method="_on_chase_start_area_body_entered"]
+[connection signal="body_exited" from="ChaseEndArea" to="." method="_on_chase_end_area_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
