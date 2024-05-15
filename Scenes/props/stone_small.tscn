@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://c14iugnjm7u7q"]
+
+[ext_resource type="Texture2D" uid="uid://jeu2356ddufa" path="res://Assets/img/props/stone_sheet.png" id="1_cl4wa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjdaf"]
+atlas = ExtResource("1_cl4wa")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4mas"]
+atlas = ExtResource("1_cl4wa")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ikhg"]
+atlas = ExtResource("1_cl4wa")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_has7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjdaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4mas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ikhg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6elu1"]
+radius = 29.0689
+
+[node name="StoneSmall" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 28
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cl4wa")
+region_enabled = true
+region_rect = Rect2(0, 0, 128.381, 128)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_has7r")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.941485
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_6elu1")

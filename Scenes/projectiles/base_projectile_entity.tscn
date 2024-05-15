@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://c67hdquy1ue04"]
+
+[ext_resource type="Script" path="res://Scenes/projectiles/base_projectile_entity.gd" id="1_imw35"]
+[ext_resource type="Texture2D" uid="uid://d2l0bpb4xv6ky" path="res://Assets/img/Actors/projectile/water_bullet.png" id="1_ygf8u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vx630"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l4scx"]
+particle_flag_disable_z = true
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+radial_velocity_min = 10.0
+radial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 1.6
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q5kj3"]
+radius = 2.0
+height = 6.0
+
+[node name="BaseProjectileEntity" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_imw35")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_ygf8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vx630")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-5, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_l4scx")
+randomness = 1.0
+collision_base_size = 0.0
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_l4scx")
+one_shot = true
+randomness = 1.0
+collision_base_size = 0.0
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 15
+
+[node name="AreaCollision" type="CollisionShape2D" parent="HitArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q5kj3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

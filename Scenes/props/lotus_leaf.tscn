@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://flwniyk5l76g"]
+
+[ext_resource type="Texture2D" uid="uid://ctqp7pu6uxoue" path="res://Assets/img/props/lotus_leaf-Sheet.png" id="1_76w38"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeacw"]
+atlas = ExtResource("1_76w38")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5n4e"]
+atlas = ExtResource("1_76w38")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh8ir"]
+atlas = ExtResource("1_76w38")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ts4cj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeacw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5n4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh8ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5n4e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hc8u4"]
+
+[node name="LotusLeaf" type="Area2D"]
+z_index = 3
+collision_layer = 0
+collision_mask = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ts4cj")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.8736
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hc8u4")
