@@ -14,8 +14,12 @@ extends CharacterBody2D
 var player_position : Vector2
 var damage_taken : bool = false
 
+signal player_game_over
+
 
 func _ready():
+	set_physics_process(true)
+	collision_shape_2d.disabled = false
 	player_position = self.global_position
 	
 	if velocity == Vector2.ZERO:
@@ -68,10 +72,22 @@ func revive() -> void:
 	sprite_2d.modulate = Color("ffffff")
 	self.global_position = player_position
 	velocity = Vector2.ZERO
-	await get_tree().create_timer(0.3).timeout
 	set_physics_process(true)
 	
-	print(Globals.player_live)
+	if Globals.player_live <= 0:
+		sprite_2d.hide()
+		player_dead()
+
+
+func player_dead() -> void:
+	set_physics_process(false)
+	player_game_over.emit()
+	await  get_tree().create_timer(0.1).timeout
+	queue_free()
+
+
+func player_status_when_timeout() -> void:
+	collision_shape_2d.set_deferred("disabled", true)
 
 
 func _on_revive_timer_timeout():

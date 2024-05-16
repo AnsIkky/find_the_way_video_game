@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy5cxxmyocx26"]
+
+[ext_resource type="Script" path="res://Scenes/UI/timer_test.gd" id="1_dpqv7"]
+
+[node name="TimerTest" type="Node2D"]
+script = ExtResource("1_dpqv7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 301.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 546.0
+offset_top = 237.0
+offset_right = 596.0
+offset_bottom = 260.0
+text = "00 : 00"

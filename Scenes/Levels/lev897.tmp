@@ -280,6 +280,11 @@ text = "00 : 00"
 
 [node name="GameOverWindow" parent="UI" instance=ExtResource("11_7x712")]
 
+[node name="GameTimer" type="Timer" parent="UI"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [node name="EntityContainer" type="Node2D" parent="." groups=["entity_container"]]
 position = Vector2(448, 640)
 
@@ -310,4 +315,5 @@ position = Vector2(80, -224)
 [node name="LargeEnemy2" parent="EntityContainer" instance=ExtResource("8_kgs2d")]
 position = Vector2(-96, -112)
 
+[connection signal="timeout" from="UI/GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="player_game_over" from="EntityContainer/Player" to="." method="_on_player_player_game_over"]
