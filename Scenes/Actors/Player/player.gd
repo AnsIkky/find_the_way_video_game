@@ -82,7 +82,7 @@ func revive() -> void:
 func player_dead() -> void:
 	set_physics_process(false)
 	player_game_over.emit()
-	await  get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout
 	queue_free()
 
 

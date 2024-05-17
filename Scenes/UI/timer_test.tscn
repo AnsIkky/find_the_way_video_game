@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy5cxxmyocx26"]
+[gd_scene load_steps=3 format=3 uid="uid://cy5cxxmyocx26"]
 
 [ext_resource type="Script" path="res://Scenes/UI/timer_test.gd" id="1_dpqv7"]
+[ext_resource type="PackedScene" uid="uid://6pbl2bkuefml" path="res://Scenes/Actors/Player/player.tscn" id="2_aqc3g"]
 
 [node name="TimerTest" type="Node2D"]
 script = ExtResource("1_dpqv7")
@@ -15,3 +16,6 @@ offset_top = 237.0
 offset_right = 596.0
 offset_bottom = 260.0
 text = "00 : 00"
+
+[node name="Player" parent="." instance=ExtResource("2_aqc3g")]
+position = Vector2(177, 153)

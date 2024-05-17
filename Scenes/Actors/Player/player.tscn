@@ -11,6 +11,7 @@ height = 24.0
 radial_velocity_min = 10.0
 radial_velocity_max = 30.0
 gravity = Vector3(0, 0, 0)
+scale_max = 3.0
 
 [sub_resource type="Animation" id="Animation_hy20n"]
 length = 0.001
@@ -133,7 +134,7 @@ region_rect = Rect2(0, 0, 32, 32)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
 position = Vector2(-12, -1)
 emitting = false
-amount = 10
+amount = 13
 process_material = SubResource("ParticleProcessMaterial_j26px")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

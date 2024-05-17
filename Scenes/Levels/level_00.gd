@@ -5,18 +5,16 @@ extends Node2D
 @onready var game_over_window = $UI/GameOverWindow as CanvasLayer
 @onready var timer_label = $UI/Timer/Control/TimerLabel as Label
 
-var level_timer_duration : float
+@export var level_timer_duration : float
 var game_timer := Timer.new()
-
 
 
 func _ready():
 	PauseHandler.can_pause = true
-
-	level_timer_duration = 301.0
 	
 	game_over_window_nonactive()
 	create_game_timer()
+	
 
 
 func _process(_delta):
@@ -28,7 +26,8 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	# marking player position from the start of the game for respawn position if player die
-	Globals.player_pos = player.global_position
+	if Globals.player_live > 0:
+		Globals.player_pos = player.global_position
 
 
 func create_game_timer() -> void:
@@ -57,9 +56,9 @@ func game_over_window_active() -> void:
 	PauseHandler.can_pause = false
 	set_physics_process(false)
 	set_process(false)
-	game_over_window.window_active()
 	game_over_window.show()
 	game_over_window.set_process(true)
+	game_over_window.window_active()
 
 
 # apply timer to timer_label node
@@ -84,9 +83,22 @@ func when_level_timer_timeout() -> void:
 		return
 
 
+
+#region function for animation zoomin when game start
+func player_can_move() -> void:
+	player.set_physics_process(true)
+
+
+func player_cannot_move() -> void:
+	player.set_physics_process(false)
+#endregion
+
+
 func _on_player_player_game_over():
-	Globals.game_over = true
-	Globals.times_out = false
+	#Globals.game_over = true
+	#Globals.times_out = false
 	game_over_window_active()
+
+
 
 
