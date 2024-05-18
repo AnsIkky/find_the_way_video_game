@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://fdsiob4ke26q"]
 
 [ext_resource type="PackedScene" uid="uid://cuacqfa3rxn6x" path="res://Scenes/Levels/level_00.tscn" id="1_2bkb5"]
-[ext_resource type="Script" path="res://Level05.gd" id="2_a16hm"]
+[ext_resource type="Script" path="res://Scenes/Levels/level_05.gd" id="2_2adcx"]
 [ext_resource type="PackedScene" uid="uid://c14iugnjm7u7q" path="res://Scenes/props/stone_small.tscn" id="3_3kwu7"]
 [ext_resource type="PackedScene" uid="uid://flwniyk5l76g" path="res://Scenes/props/lotus_leaf.tscn" id="3_bpmxw"]
 [ext_resource type="PackedScene" uid="uid://b5jpdolm3ed2x" path="res://Scenes/props/lotus_flower_01.tscn" id="4_p1cn3"]
@@ -117,7 +117,7 @@ _data = {
 }
 
 [node name="Level05" instance=ExtResource("1_2bkb5")]
-script = ExtResource("2_a16hm")
+script = ExtResource("2_2adcx")
 level_timer_duration = 310.0
 
 [node name="DirtTile" parent="Tiles" index="0"]
@@ -387,6 +387,10 @@ metadata/_edit_lock_ = true
 [node name="StoneSmall15" parent="Props/Rocks" index="14" instance=ExtResource("3_3kwu7")]
 position = Vector2(1856, 2496)
 metadata/_edit_lock_ = true
+
+[node name="FinishLine" parent="Props/FinishGoal" index="0"]
+position = Vector2(1888, 3208)
+next_level_location = "res://Scenes/Levels/transition_level/transition_level_06.tscn"
 
 [node name="Camera2D" parent="." index="3"]
 position = Vector2(1560, 1344)

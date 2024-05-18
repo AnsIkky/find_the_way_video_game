@@ -52,7 +52,10 @@ func on_restart_button_pressed() -> void:
 
 
 func on_exit_button_pressed() -> void:
-	print("exit button has been pressed")
+	not_active_button()
+	animation_player.play_backwards("pop_up")
+	await animation_player.animation_finished
+	TransitionLayer.change_scene("res://Scenes/Levels/title_screen.tscn")
 
 
 func handle_connecting_signal() -> void:

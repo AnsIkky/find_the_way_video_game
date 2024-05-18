@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xlkt0uj5mj2k"]
+[gd_scene load_steps=14 format=3 uid="uid://xlkt0uj5mj2k"]
 
 [ext_resource type="PackedScene" uid="uid://cuacqfa3rxn6x" path="res://Scenes/Levels/level_00.tscn" id="1_jbmda"]
 [ext_resource type="Script" path="res://Scenes/Levels/level_01.gd" id="2_p7yl5"]
@@ -12,6 +12,9 @@
 size = Vector2(288, 20)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7swms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxpxt"]
+size = Vector2(32, 208)
 
 [sub_resource type="Animation" id="Animation_41pkw"]
 length = 0.001
@@ -140,6 +143,12 @@ position = Vector2(2624, 2176)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_7swms")
 
+[node name="EnemyBorder" parent="WorldBorders" index="2"]
+position = Vector2(2304, 2176)
+
+[node name="CollisionShape2D" parent="WorldBorders/EnemyBorder" index="0"]
+shape = SubResource("RectangleShape2D_hxpxt")
+
 [node name="LotusLeaf2" parent="Props/Plants/LotusLeaf" index="0" instance=ExtResource("3_ka3u8")]
 position = Vector2(1552, 232)
 metadata/_edit_lock_ = true
@@ -211,6 +220,11 @@ position = Vector2(1024, 1728)
 
 [node name="StoneSmall4" parent="Props/Rocks" index="3" instance=ExtResource("6_qqvsf")]
 position = Vector2(1344, 1664)
+
+[node name="FinishLine" parent="Props/FinishGoal" index="0"]
+position = Vector2(2568, 2176)
+rotation = -1.5708
+next_level_location = "res://Scenes/Levels/transition_level/transition_level_02.tscn"
 
 [node name="Camera2D" parent="." index="3"]
 position = Vector2(1608, 1152)

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Aqua Theme Project"
+run/main_scene="res://Scenes/UI/opening_scene.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -18,6 +19,7 @@ config/icon="res://icon.svg"
 
 Globals="*res://Scenes/Autoloads/global.gd"
 PauseHandler="*res://Scenes/handler/pause_handler.tscn"
+TransitionLayer="*res://Scenes/Autoloads/transition_layer.tscn"
 
 [display]
 
@@ -62,6 +64,7 @@ pause_button={
 2d_physics/layer_3="player"
 2d_physics/layer_4="enemy"
 2d_physics/layer_5="projectile"
+2d_physics/layer_6="enemy_border"
 
 [rendering]
 

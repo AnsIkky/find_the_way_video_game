@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuacqfa3rxn6x"]
+[gd_scene load_steps=20 format=3 uid="uid://cuacqfa3rxn6x"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level_00.gd" id="1_cveox"]
 [ext_resource type="PackedScene" uid="uid://6pbl2bkuefml" path="res://Scenes/Actors/Player/player.tscn" id="1_ga7ey"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d034cg3j635iw" path="res://Assets/img/Tileset/tile_02_waves.png" id="3_8bwgu"]
 [ext_resource type="Texture2D" uid="uid://c62u5cjx3pvqj" path="res://Assets/img/Tileset/sakura trees-Sheet.png" id="3_lm3x1"]
 [ext_resource type="Texture2D" uid="uid://ch243t07seyv0" path="res://Assets/img/Tileset/trees-Sheet.png" id="4_5jmpg"]
+[ext_resource type="PackedScene" uid="uid://tm60h4s7wtjt" path="res://Scenes/props/finish_line.tscn" id="7_p8jcf"]
 [ext_resource type="PackedScene" uid="uid://crm3cs6ku3tes" path="res://Scenes/UI/hud.tscn" id="10_irlx7"]
 [ext_resource type="PackedScene" uid="uid://bf17e771elgay" path="res://Scenes/UI/game_over_window.tscn" id="11_7x712"]
 [ext_resource type="FontFile" uid="uid://bbpwmmscgirn" path="res://Assets/fonts/RonysiswadiArchitect4-qZmp2.ttf" id="12_1n07w"]
@@ -260,6 +261,12 @@ collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/FinishBorder"]
 
+[node name="EnemyBorder" type="StaticBody2D" parent="WorldBorders"]
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/EnemyBorder"]
+
 [node name="Props" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
@@ -277,6 +284,8 @@ metadata/_edit_lock_ = true
 
 [node name="FinishGoal" type="Node2D" parent="Props"]
 metadata/_edit_lock_ = true
+
+[node name="FinishLine" parent="Props/FinishGoal" instance=ExtResource("7_p8jcf")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(360, 352)

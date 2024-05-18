@@ -246,6 +246,11 @@ metadata/_edit_lock_ = true
 position = Vector2(1472, -192)
 metadata/_edit_lock_ = true
 
+[node name="FinishLine" parent="Props/FinishGoal" index="0"]
+position = Vector2(-1624, -32)
+rotation = 1.5708
+next_level_location = "res://Scenes/Levels/transition_level/transition_level_04.tscn"
+
 [node name="Camera2D" parent="." index="3"]
 position = Vector2(144, 512)
 

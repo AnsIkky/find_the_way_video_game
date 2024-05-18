@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://df8ccu376f2ob"]
+
+[ext_resource type="PackedScene" uid="uid://nqketgrsvbll" path="res://Scenes/Levels/transition_level/transition_level_01.tscn" id="1_7qshm"]
+[ext_resource type="Script" path="res://Scenes/Levels/transition_level/transition_level_04.gd" id="2_52gcr"]
+
+[node name="TransitionLevel04" instance=ExtResource("1_7qshm")]
+script = ExtResource("2_52gcr")
+level_text = "Level 4"
+next_level_location = "res://Scenes/Levels/level_04.tscn"

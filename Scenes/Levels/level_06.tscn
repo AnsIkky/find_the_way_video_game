@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bh8al3v83byr1"]
 
 [ext_resource type="PackedScene" uid="uid://cuacqfa3rxn6x" path="res://Scenes/Levels/level_00.tscn" id="1_q6b2v"]
-[ext_resource type="Script" path="res://Level06.gd" id="2_ywwm3"]
+[ext_resource type="Script" path="res://Scenes/Levels/level_06.gd" id="2_l4w3g"]
 [ext_resource type="PackedScene" uid="uid://35otff8qcc28" path="res://Scenes/props/stone_large.tscn" id="3_0c1tf"]
 [ext_resource type="PackedScene" uid="uid://flwniyk5l76g" path="res://Scenes/props/lotus_leaf.tscn" id="3_ps1gc"]
 [ext_resource type="PackedScene" uid="uid://c14iugnjm7u7q" path="res://Scenes/props/stone_small.tscn" id="4_eat3l"]
@@ -118,7 +118,7 @@ _data = {
 }
 
 [node name="Level06" instance=ExtResource("1_q6b2v")]
-script = ExtResource("2_ywwm3")
+script = ExtResource("2_l4w3g")
 level_timer_duration = 310.0
 
 [node name="DirtTile" parent="Tiles" index="0"]

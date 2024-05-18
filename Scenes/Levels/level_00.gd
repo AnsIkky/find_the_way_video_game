@@ -12,6 +12,8 @@ var game_timer := Timer.new()
 func _ready():
 	PauseHandler.can_pause = true
 	
+	Globals.player_live = Globals.max_lives
+	
 	game_over_window_nonactive()
 	create_game_timer()
 	

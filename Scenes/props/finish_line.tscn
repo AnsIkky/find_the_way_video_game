@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://tm60h4s7wtjt"]
+
+[ext_resource type="Script" path="res://Scenes/props/finish_line.gd" id="1_efg30"]
+[ext_resource type="Texture2D" uid="uid://3ygodqmlr24p" path="res://Assets/img/Actors/Player/player-Sheet_02.png" id="1_kavid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixjxi"]
+atlas = ExtResource("1_kavid")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc5hd"]
+atlas = ExtResource("1_kavid")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oeldq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixjxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc5hd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_is6yw"]
+radius = 37.0
+
+[node name="FinishLine" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_efg30")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_oeldq")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.95189
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-15, 3)
+rotation = 0.319395
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_oeldq")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.95189
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, 11)
+rotation = -0.193732
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_oeldq")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.95189
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 5)
+rotation = -0.671952
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_oeldq")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.95189
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, 13)
+rotation = 0.207694
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_oeldq")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.95189
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_is6yw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
